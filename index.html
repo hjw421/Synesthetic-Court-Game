@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공감각의 코트: 에코 앤 캔버스 (Synesthetic Court: Echo & Canvas)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@200;400;600;800&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Glow Nodes -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <h1 class="logo">SYNESTHETIC COURT</h1>
+            <span class="subtitle">ECHO & CANVAS</span>
+        </div>
+    </header>
+
+    <main class="app-container">
+        <!-- Hero Intro Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <p class="tagline">AI와의 랠리에서 승리해 보세요!</p>
+                <a href="#arena" class="btn btn-primary btn-glow btn-scroll">코트 입장하기</a>
+            </div>
+        </section>
+
+        <!-- Game Arena Section -->
+        <section id="arena" class="arena-section">
+            <div class="arena-card">
+                <!-- Live Display Overlay -->
+                <div class="game-hud">
+                    <div class="hud-item">
+                        <span class="hud-label">RALLY</span>
+                        <span id="score-val" class="hud-value">0</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">RESONANCE</span>
+                        <div class="energy-bar-container">
+                            <div id="energy-bar" class="energy-bar"></div>
+                        </div>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">BEST RESONANCE</span>
+                        <span id="best-score-val" class="hud-value">0</span>
+                    </div>
+                </div>
+
+                <!-- Canvas and Screen State Overlays -->
+                <div class="canvas-container">
+                    <canvas id="game-canvas"></canvas>
+
+                    <!-- Start Overlay -->
+                    <div id="screen-start" class="screen-overlay active">
+                        <div class="overlay-content">
+                            <h2>ECHO & CANVAS</h2>
+                            <p class="overlay-desc">마우스를 움직이거나 터치로 패들을 움직여 공을 받아치세요.<br>AI 에이전트와 아름다운 소리 및 시각의 조화를 이뤄내세요.</p>
+                            
+                            <!-- Difficulty Selection Button -->
+                            <div class="difficulty-container">
+                                <span class="difficulty-label">난이도 선택 (Difficulty)</span>
+                                <div class="difficulty-selector">
+                                    <button class="diff-btn active" data-diff="beginner">Beginner</button>
+                                    <button class="diff-btn" data-diff="advanced">Advanced</button>
+                                    <button class="diff-btn" data-diff="hard">Hard</button>
+                                </div>
+                            </div>
+                            
+                            <button id="btn-start" class="btn btn-large btn-cyan">플레이 시작</button>
+                        </div>
+                    </div>
+
+                    <!-- Game Over Overlay -->
+                    <div id="screen-gameover" class="screen-overlay">
+                        <div class="overlay-content">
+                            <h2 class="text-glow-red">공명 종료</h2>
+                            <p class="overlay-desc">소리와 시각의 연결이 차단되었습니다.<br>인간과 인공지능이 합작한 한 폭의 추상 예술을 감상하고 저장해 보세요.</p>
+                            <div class="artwork-preview-info">
+                                <span id="final-rally-info">최종 랠리: 0</span>
+                            </div>
+                            <div class="btn-group">
+                                <button id="btn-retry" class="btn btn-cyan">다시 시도</button>
+                                <button id="btn-save-artwork" class="btn btn-magenta">작품 저장 (.PNG)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game System Controls -->
+                <div class="game-controls">
+                    <button id="btn-sound-toggle" class="control-btn" aria-label="사운드 토글">
+                        <span class="icon">🔊</span>
+                        <span id="sound-status-text">SOUND ON</span>
+                    </button>
+                    <button id="btn-pause-toggle" class="control-btn" aria-label="랠리 일시정지">
+                        <span class="icon">⏸️</span>
+                        <span id="pause-status-text">PAUSE RALLY</span>
+                    </button>
+                    <button id="btn-stop-rally" class="control-btn" aria-label="랠리 중단">
+                        <span class="icon">⏹️</span>
+                        <span>STOP RALLY</span>
+                    </button>
+                    <button id="btn-fullscreen" class="control-btn" aria-label="전체화면">
+                        <span class="icon">🖥️</span>
+                        <span>FULLSCREEN</span>
+                    </button>
+                    <button id="btn-clear-canvas" class="control-btn" aria-label="작품 초기화">
+                        <span class="icon">🔄</span>
+                        <span>RESET ART</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brief How-To Section -->
+        <section id="how-to" class="info-section">
+            <div class="glass-panel">
+                <h2>상호작용 방법 (How to Attune)</h2>
+                <div class="how-to-grid">
+                    <div class="how-to-card">
+                        <div class="how-to-icon">🖱️</div>
+                        <h3>마우스 / 터치 조작</h3>
+                        <p>화면 우측의 푸른색 패들이 당신입니다. 마우스를 세로로 움직이거나 화면을 손가락으로 드래그하여 패들을 조작하세요.</p>
+                    </div>
+                    <div class="how-to-card">
+                        <div class="how-to-icon">🎹</div>
+                        <h3>소리의 융합</h3>
+                        <p>공을 받아칠 때마다 아름다운 펜타토닉 음계가 연주됩니다. 랠리를 길게 유지할수록 풍성한 화음 패드가 깔리며 배경 사운드가 완성됩니다.</p>
+                    </div>
+                    <div class="how-to-card">
+                        <div class="how-to-icon">🎨</div>
+                        <h3>추상 페인팅</h3>
+                        <p>공이 패들이나 외벽에 튕길 때마다 형형색색의 잉크가 번집니다. 랠리가 끝난 순간, 오직 당신만이 가진 고유한 디지털 미디어 아트가 화면에 정착됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artist Statement Section -->
+        <section id="statement" class="info-section">
+            <div class="glass-panel statement-panel">
+                <h2>아티스트 스테이트먼트 (Artist Statement)</h2>
+                <div class="statement-body">
+                    <h3>인간과 AI의 대화: 충돌에서 공명으로</h3>
+                    <p>
+                        우리는 종종 기술을 인간의 적대자로, 혹은 단순한 효율성의 도구로만 바라보곤 합니다. 특히 인공지능(AI)의 등장은 인간과 기계 간의 새로운 긴장 관계를 형성했습니다. 본 인터랙티브 미디어 아트 게임 <strong>《공감각의 코트: 에코 앤 캔버스》</strong>는 가장 대중적이면서도 직관적인 놀이인 테니스/탁구(Pong)의 포맷을 빌려와, 인간과 AI가 경쟁의 관계를 넘어 '창작의 공동 파트너'로서 조화를 이루어가는 공명(Resonance)의 과정을 시각과 청각의 융합으로 표현하고자 했습니다.
+                    </p>
+                    
+                    <p>
+                        게임 속에서 플레이어가 마주하는 반대편의 패들은 고도로 훈련된 AI 에이전트입니다. 이 에이전트는 당신을 패배시키기 위해 공격을 가하는 것이 아니라, 당신의 템포와 랠리에 호응하여 움직이도록 정교하게 설계되어 있습니다. 플레이어가 공을 칠 때의 속도와 각도는 공의 물리적 회전을 결정하고, 이는 곧 캔버스 위에 흩뿌려지는 색채의 궤적(Generative Paint Splatter)과 사운드의 주파수(Web Audio Synthesizer)로 즉시 번역됩니다.
+                    </p>
+
+                    <blockquote>
+                        "공이 코트를 가르는 단 한 순간의 접촉은, 인간의 물리적 무작위성과 디지털 알고리즘의 규칙성이 결합하여 피어나는 새로운 감각적 사건이다."
+                    </blockquote>
+
+                    <p>
+                        랠리가 끊기지 않고 10회, 20회 이상 지속될수록 단순했던 신디사이저 단음은 점점 레이어링되며 우아하고 두터운 앰비언트 사운드스케이프(Ambient Soundscape)로 발전합니다. 공명 게이지가 극대화될 때 캔버스는 네온 컬러의 스펙트럼과 파티클로 충만해지며 황홀한 몰입 상태를 유도합니다. 그리고 마침내 랠리가 끝나 실패하는 순간, 게임은 인간과 AI가 함께 나눈 치열한 상호작용의 대화록을 한 폭의 완성된 추상 액션 페인팅(Action Painting)으로 고정하여 화면에 남깁니다.
+                    </p>
+
+                    <p>
+                        이 작품은 AI 에이전트와의 협업적 바이브 코딩(Vibe Coding)을 통해 구상되고 조율되었습니다. 개발 주체와 실행 도구로서의 관계가 아니라, 예술적 의도를 조율해 나가며 코드를 다듬어 나간 이 협력이야말로 아티스트 스테이트먼트의 살아있는 증거입니다. 관객이자 플레이어인 당신이 완성해 내는 캔버스는 기술과 예술의 교차점에서 인간과 인공지능이 도달할 수 있는 가장 평화롭고 조화로운 풍경이 될 것입니다.
+                    </p>
+                </div>
+                <div class="statement-footer">
+                    <p class="credits">제작: 예술공학개론 과제 프로젝트 | 기술 스택: Vanilla JS, HTML5 Canvas 2D, Web Audio API | 배포: Vercel Static Hosting</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>&copy; 2026 Synesthetic Court. Crafted for Art & Technology.</p>
+    </footer>
+
+    <!-- Game Logic Scripts -->
+    <script src="game.js"></script>
+</body>
+</html>
